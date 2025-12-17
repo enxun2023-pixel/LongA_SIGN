@@ -257,6 +257,11 @@ function addToHistory(item) {
     const chip = document.createElement('span');
     chip.className = `chip chip-${currentMealType} blur-in`;
     chip.textContent = item;
+    chip.style.cursor = 'pointer';
+    chip.addEventListener('click', () => {
+        const searchUrl = `https://www.google.com/maps/search/${encodeURIComponent(item)}`;
+        window.open(searchUrl, '_blank');
+    });
     ui.historyList.appendChild(chip);
 
     // Remove oldest item if over limit
