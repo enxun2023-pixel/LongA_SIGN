@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什麼？</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-utensils"></i>
+                <h1>今天吃什麼？</h1>
+            </div>
+            <button id="settings-btn" class="icon-btn" aria-label="設定">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </header>
+
+        <main>
+            <div class="meal-selector">
+                <button class="meal-tab active" data-type="breakfast">早餐</button>
+                <button class="meal-tab" data-type="lunch">午餐</button>
+                <button class="meal-tab" data-type="dinner">晚餐</button>
+            </div>
+
+            <div class="card main-card">
+                <div class="result-display">
+                    <span class="emoji" id="result-emoji">🤔</span>
+                    <h2 id="result-text">點擊按鈕決定！</h2>
+                </div>
+
+                <button id="spin-btn" class="primary-btn">
+                    幫我選！
+                    <i class="fa-solid fa-dice"></i>
+                </button>
+            </div>
+
+            <div class="quick-actions">
+                <p>最近的選擇...</p>
+                <div id="history-list" class="history-chips">
+                    <!-- History items will go here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <header class="modal-header">
+                <button id="close-modal" class="text-btn"><i class="fa-solid fa-chevron-left"></i> 返回</button>
+                <h3>管理菜單</h3>
+                <div style="width: 48px;"></div> <!-- Spacer for centering title -->
+            </header>
+
+            <div class="modal-body">
+                <!-- Section: Menu Sets -->
+                <div class="setting-section">
+                    <label>
+                        選擇菜單組合
+                        <span id="current-set-badge" class="badge">目前: 一般菜單</span>
+                    </label>
+                    <div class="set-control">
+                        <select id="set-selector">
+                            <!-- Options populated by JS -->
+                        </select>
+                        <button id="load-set-btn" class="secondary-btn">套用</button>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Section: Edit Lists -->
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-target="edit-breakfast">早餐列表</button>
+                    <button class="modal-tab" data-target="edit-lunch">午餐列表</button>
+                    <button class="modal-tab" data-target="edit-dinner">晚餐列表</button>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="new-food-input" placeholder="新增食物... (例如: 牛肉麵)">
+                    <button id="add-food-btn" class="secondary-btn">新增</button>
+                </div>
+
+                <ul id="food-list" class="food-list">
+                    <!-- Food items list -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">已成功套用！</div>
+
+    <script src="menus.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
