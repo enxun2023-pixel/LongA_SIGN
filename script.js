@@ -155,7 +155,7 @@ function showToast(msg) {
         setTimeout(() => {
             ui.toast.classList.add('hidden');
         }, 300);
-    }, 2000);
+    }, 5000);
 }
 
 // UI Functions
@@ -296,6 +296,15 @@ function getEmojiForFood(food) {
     return '😋';
 }
 
+function getMealTypeName(type) {
+    const names = {
+        breakfast: '早餐',
+        lunch: '午餐',
+        dinner: '晚餐'
+    };
+    return names[type] || type;
+}
+
 // Modal Logic
 let currentEditType = 'breakfast'; // Default for modal
 
@@ -345,6 +354,9 @@ function addFood() {
     saveData();
     renderFoodList(currentEditType);
     ui.addInput.value = '';
+
+    const mealTypeName = getMealTypeName(currentEditType);
+    showToast(`已在「${currentSetName}」的「${mealTypeName}」新增「${val}」！`);
 }
 
 window.removeFood = function (index) {
