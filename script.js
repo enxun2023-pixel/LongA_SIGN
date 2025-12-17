@@ -11,6 +11,7 @@ const ui = {
     resultText: document.getElementById('result-text'),
     resultEmoji: document.getElementById('result-emoji'),
     historyList: document.getElementById('history-list'),
+    clearHistoryBtn: document.getElementById('clear-history-btn'),
     resultDisplay: document.querySelector('.result-display'),
 
     // Modal
@@ -170,6 +171,9 @@ function setupEventListeners() {
     // Spin
     ui.spinBtn.addEventListener('click', spin);
 
+    // Clear History
+    ui.clearHistoryBtn.addEventListener('click', clearHistory);
+
     // Modal
     ui.settingsBtn.addEventListener('click', () => openModal());
     ui.closeModalBtn.addEventListener('click', () => closeModal());
@@ -248,14 +252,29 @@ function addToHistory(item) {
 
     // Store with meal type for color coding - append to end to avoid jumping
     history.push({ item: item, type: currentMealType });
-    if (history.length > 16) history.shift(); // Remove from front
-    renderHistory();
+
+    // Create and append new chip element (only new item animates)
+    const chip = document.createElement('span');
+    chip.className = `chip chip-${currentMealType} blur-in`;
+    chip.textContent = item;
+    ui.historyList.appendChild(chip);
+
+    // Remove oldest item if over limit
+    if (history.length > 18) {
+        history.shift();
+        ui.historyList.firstChild.remove();
+    }
 }
 
 function renderHistory() {
     ui.historyList.innerHTML = history.map(h =>
-        `<span class="chip chip-${h.type} blur-in">${h.item}</span>`
+        `<span class="chip chip-${h.type}">${h.item}</span>`
     ).join('');
+}
+
+function clearHistory() {
+    history = [];
+    renderHistory();
 }
 
 function getEmojiForFood(food) {

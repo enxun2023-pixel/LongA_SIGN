@@ -260,6 +260,22 @@ main {
     border-color: rgba(165, 94, 234, 0.3);
 }
 
+.clear-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.clear-btn:hover {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
 /* Modal */
 .modal {
     position: absolute;
